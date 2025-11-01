@@ -52,3 +52,42 @@ WHERE TABLE_NAME = 'fact_sales'
 -- AND TABLE_SCHEMA = 'gold'   -- Uncomment to narrow by schema
 ORDER BY ORDINAL_POSITION;
 GO
+
+
+
+
+/********************************************************************************************
+    Extra  : Combined Database Structure Overview
+    Description  : 
+        This query combines INFORMATION_SCHEMA.TABLES and INFORMATION_SCHEMA.COLUMNS 
+        to show both table-level and column-level metadata in a single result set.
+
+    Purpose :
+        - Explore table details and their columns together.
+        - Useful for quick schema inspection or documentation.
+    
+    System Views Used :
+        - INFORMATION_SCHEMA.TABLES   → Contains list of all tables and views.
+        - INFORMATION_SCHEMA.COLUMNS  → Contains column details for each table.
+
+    Notes :
+        - Replace 'fact_sales' with any table name you want to inspect.
+        - You can remove the WHERE clause to list all tables and their columns.
+********************************************************************************************/
+
+SELECT
+    t.TABLE_CATALOG       AS [Database_Name],       -- Database the table belongs to
+    t.TABLE_SCHEMA        AS [Schema_Name],         -- Schema name (e.g., gold, dbo)
+    t.TABLE_NAME          AS [Table_Name],          -- Table name
+    c.COLUMN_NAME         AS [Column_Name],         -- Column name within the table
+    c.DATA_TYPE           AS [Data_Type],           -- Data type of the column
+    c.IS_NULLABLE         AS [Is_Nullable]          -- Whether NULL values are allowed
+FROM INFORMATION_SCHEMA.TABLES  AS t
+JOIN INFORMATION_SCHEMA.COLUMNS AS c
+    ON t.TABLE_SCHEMA = c.TABLE_SCHEMA
+   AND t.TABLE_NAME   = c.TABLE_NAME
+WHERE t.TABLE_NAME = 'fact_sales'       -- Filter for a specific table
+-- AND t.TABLE_SCHEMA = 'gold'          -- Optional: filter by schema
+ORDER BY t.TABLE_SCHEMA, t.TABLE_NAME, c.ORDINAL_POSITION;
+GO
+
