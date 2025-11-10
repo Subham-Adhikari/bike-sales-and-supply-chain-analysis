@@ -45,11 +45,11 @@ GO
 -- ⚠️ NOTE: Sorting will not be truly chronological because FORMAT() outputs text.
 -- -------------------------------------------------------------------------------------------------------
 SELECT
-	FORMAT(order_date, 'yyyy MMM') AS order_date,  -- Converts date to 'YYYY Month' text
+	FORMAT(order_date, 'yyyy-MMM') AS order_date,  -- Converts date to 'YYYY Month' text
 	SUM(sales_amount) AS sales_amount              -- Aggregates total sales
 FROM gold.fact_sales 
 WHERE order_date IS NOT NULL 
-GROUP BY FORMAT(order_date, 'yyyy MMM')
+GROUP BY FORMAT(order_date, 'yyyy-MMM')
 ORDER BY order_date;                              -- Sorts alphabetically, not by actual date
 GO
 
