@@ -117,12 +117,6 @@ These views act as a **semantic layer** and can be directly connected to **Power
 
 ---
 
-## 🚀 Career Context
-Built as part of preparation for a **first Data Analyst role after a career gap**.  
-The project emphasizes analytical thinking, SQL proficiency, and business-focused reporting.
-
----
-
 ## 💻 Tools & Technologies
 - MS SQL Server (T-SQL)
 - Relational Data Modeling
@@ -132,4 +126,3 @@ The project emphasizes analytical thinking, SQL proficiency, and business-focuse
 
 ## 📝 Notes
 - Dataset is a **company-like mock dataset**
-- No real business or customer data is used
