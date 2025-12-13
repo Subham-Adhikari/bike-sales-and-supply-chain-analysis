@@ -1,60 +1,120 @@
-# bike-sales-and-supply-chain-analysis
-Exploratory and advanced data analysis of bicycle sales and supply chain data.
+# Bike Sales Supply Chain Analytics (EDA & ADA using SQL)
 
+## Project Overview
+This project focuses on analyzing bike sales supply chain data using **pure SQL (T-SQL on MS SQL Server)**.  
+The objective is to transform raw transactional data into **business-ready analytical views** that support dashboards, fast insights, and decision-making.
 
-
-
-# 📊 Sales Performance Analysis (2010 – 2014)
-
-When I explored the company’s sales data, my main goal was to understand how total revenue changed over time — to identify which years drove the most growth and when performance started to decline.
+The project covers both **Exploratory Data Analysis (EDA)** and **Advanced Data Analysis (ADA)** and is designed to reflect how analytics is performed in a real company environment.
 
 ---
 
-## 🎯 Objective  
-To analyze the **year-wise sales performance** between **2010 and 2014**, track growth trends, and uncover meaningful insights about business performance and market stability.
+## Business Context
+- **Domain:** Bike Sales & Supply Chain Analytics  
+- **Target Audience:** Business stakeholders and dashboard users  
+- **Primary Use Case:**  
+  Enable quick insight discovery, performance monitoring, and BI dashboard consumption without additional data transformation.
 
 ---
 
-## 🔍 Approach  
-I analyzed several years of sales transactions, focusing on three key metrics — total revenue, total quantity sold, and number of unique customers.  
-The data was cleaned, structured, and optimized to ensure accuracy. Once ready, I compared each year’s total sales to highlight growth patterns and shifts in performance.
+## Dataset Summary
+- Company-like mock data (realistic business structure)
+- Approximately **60,000 sales records**
+- Time period: **late 2010 to early 2014**
+- Star schema design:
+  - `fact_sales` – transactional sales data
+  - `dim_products` – product master data
+  - `dim_customers` – customer attributes
 
 ---
 
-## 📈 Insights & Findings  
+## Analysis Performed
 
-Here’s what the analysis revealed:  
+### Exploratory Data Analysis (EDA)
+- Sales trends over time (year / month level)
+- Revenue and quantity distribution
+- Product and category contribution analysis
+- Order volume behavior
+- Customer purchasing patterns
 
-- **2010 → ₹43,419** – Very low sales activity, likely the initial phase of business operations.  
-- **2011 → ₹7,075,088** – A major rise in sales, marking the first strong growth year.  
-- **2012 → ₹5,842,231** – A slight dip but still a healthy and consistent year.  
-- **2013 → ₹16,344,878** – The breakthrough year, contributing over **55%** of total revenue.  
-- **2014 → ₹45,642** – A sharp decline, possibly due to reduced activity or incomplete data.
-
-**💰 Total Revenue (2010–2014): ₹29,356,250**
-
----
-
-## 📊 Trend Summary  
-The company experienced a significant upward trend between **2011 and 2013**, followed by a sudden drop in 2014.  
-This pattern could indicate either a business contraction, market shift, or data cutoff for that year.  
-
-The standout observation was **2013**, where sales growth far exceeded all previous years — suggesting either an expansion phase, new product success, or an effective sales strategy.
+EDA was used to understand **data behavior, seasonality, and business drivers** before deriving KPIs.
 
 ---
 
-## 🚀 Conclusion  
-Through this time-based analysis, I was able to turn raw transactional data into a meaningful story of the company’s journey — from slow beginnings to remarkable growth, and finally a decline that warrants deeper investigation.  
-
-This analysis helps businesses:  
-- Identify growth and slowdown periods 📈  
-- Understand long-term revenue patterns 📊  
-- Make informed, data-driven decisions for future planning 💼  
+### Advanced Data Analysis (ADA)
+- Product-level performance aggregation
+- Customer-level behavioral aggregation
+- Revenue-based product segmentation
+  - High / Mid / Low performers
+- Product lifecycle analysis
+- Recency analysis (time since last sale)
+- Key business KPIs:
+  - Average Order Revenue (AOR)
+  - Average Monthly Revenue (AMR)
+  - Customer reach (unique customers)
+  - Order frequency
 
 ---
 
-## 💬 Reflection  
-The project reinforced the importance of looking beyond total numbers — by analyzing **when** and **how** revenue changes, we uncover powerful insights about business evolution and strategy effectiveness.  
-Every dataset has a story; this one told the tale of steady growth, a powerful peak, and a sudden pause — a reminder that trends always speak louder than snapshots.
+## Reporting Layer (Final Deliverables)
 
+This project produces **two reusable analytical views**:
 
+### 1. Product-Level Reporting View
+- Product performance metrics
+- Revenue segmentation
+- Product lifespan and recency
+- KPIs suitable for executive dashboards
+
+### 2. Customer-Level Reporting View
+- Customer purchasing behavior
+- Order frequency and value
+- Recency indicators
+- Supports customer analytics and retention insights
+
+These views act as a **semantic layer** and can be directly connected to BI tools such as **Power BI or Tableau**.
+
+---
+
+## Key SQL Concepts Used
+- Common Table Expressions (CTEs)
+- Multi-level aggregations
+- Date intelligence using `DATEDIFF`
+- Safe calculations using `NULLIF`
+- Business KPI derivation
+- Reusable view design
+- Schema-based organization
+
+---
+
+## Why This Project Matters
+- Demonstrates end-to-end analytical thinking using SQL only
+- Shows ability to move from raw data to business-ready reporting
+- Reflects real-world analytics workflows used in companies
+- Emphasizes clarity, scalability, and dashboard readiness
+
+---
+
+## Intended Audience
+- Data Analysts
+- Business Analysts
+- BI Developers
+- Hiring Managers evaluating SQL and analytical skills
+
+---
+
+## Career Context
+This project was built as part of preparing for a **first Data Analyst role after a career gap**.  
+It reflects strong SQL fundamentals, business understanding, and the ability to build structured analytical outputs suitable for real organizations.
+
+---
+
+## Tools & Technologies
+- SQL Server (T-SQL)
+- Relational Data Modeling
+- Analytical SQL Design
+
+---
+
+## Notes
+- Dataset is a **company-like mock dataset** created for learning and portfolio purposes
+- No real customer or company data is used
