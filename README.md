@@ -1,120 +1,135 @@
-# Bike Sales Supply Chain Analytics (EDA & ADA using SQL)
+# 🚲 Bike Sales Supply Chain Analytics (EDA & ADA using SQL)
 
-## Project Overview
-This project focuses on analyzing bike sales supply chain data using **pure SQL (T-SQL on MS SQL Server)**.  
-The objective is to transform raw transactional data into **business-ready analytical views** that support dashboards, fast insights, and decision-making.
-
-The project covers both **Exploratory Data Analysis (EDA)** and **Advanced Data Analysis (ADA)** and is designed to reflect how analytics is performed in a real company environment.
+## 📌 Project Overview
+SQL-based analytics project built using **T-SQL (MS SQL Server)** to analyze bike sales and supply chain performance.  
+The project converts raw transactional data into **dashboard-ready analytical views** for fast insight generation and business decision-making.
 
 ---
 
-## Business Context
-- **Domain:** Bike Sales & Supply Chain Analytics  
-- **Target Audience:** Business stakeholders and dashboard users  
-- **Primary Use Case:**  
-  Enable quick insight discovery, performance monitoring, and BI dashboard consumption without additional data transformation.
+## 🏢 Business Context
+- **Domain:** 🚲 Bike Sales & Supply Chain Analytics  
+- **Primary Consumers:** 📊 Dashboards, business users, analysts  
+- **Objective:** Enable quick performance monitoring and insight discovery without additional data transformation
 
 ---
 
-## Dataset Summary
-- Company-like mock data (realistic business structure)
-- Approximately **60,000 sales records**
-- Time period: **late 2010 to early 2014**
-- Star schema design:
-  - `fact_sales` – transactional sales data
-  - `dim_products` – product master data
-  - `dim_customers` – customer attributes
+## 🗂 Dataset Summary
+- Company-like mock dataset
+- ~**60,000** sales records
+- Data period: **late 2010 – early 2014**
+- Star schema model:
+  - `fact_sales`
+  - `dim_products`
+  - `dim_customers`
 
 ---
 
-## Analysis Performed
+## 🔍 Analysis Coverage
 
 ### Exploratory Data Analysis (EDA)
-- Sales trends over time (year / month level)
-- Revenue and quantity distribution
-- Product and category contribution analysis
-- Order volume behavior
+- Time-based sales and revenue trends
+- Category and product contribution
+- Order volume and quantity distribution
 - Customer purchasing patterns
 
-EDA was used to understand **data behavior, seasonality, and business drivers** before deriving KPIs.
-
----
-
 ### Advanced Data Analysis (ADA)
-- Product-level performance aggregation
-- Customer-level behavioral aggregation
-- Revenue-based product segmentation
-  - High / Mid / Low performers
-- Product lifecycle analysis
-- Recency analysis (time since last sale)
-- Key business KPIs:
-  - Average Order Revenue (AOR)
-  - Average Monthly Revenue (AMR)
-  - Customer reach (unique customers)
-  - Order frequency
+- Product and customer-level aggregations
+- Revenue-based performance segmentation
+- Product lifecycle and recency analysis
+- KPI calculation for reporting and dashboards
 
 ---
 
-## Reporting Layer (Final Deliverables)
+## 📊 Demo Business Metrics (Sample Insights)
 
-This project produces **two reusable analytical views**:
+> ⚠️ *Figures shown below are representative demo values for illustration.  
+Actual values will be updated based on final outputs.*
 
-### 1. Product-Level Reporting View
-- Product performance metrics
-- Revenue segmentation
-- Product lifespan and recency
-- KPIs suitable for executive dashboards
+### 🔹 Overall Sales Performance
+- Sales records analyzed: **~XX,XXX**
+- Total revenue generated: **~₹X.XM**
+- Average Order Revenue (AOR): **~₹X,XXX**
+- Average Monthly Revenue (AMR): **~₹XX,XXX**
 
-### 2. Customer-Level Reporting View
-- Customer purchasing behavior
-- Order frequency and value
+---
+
+### 🔹 Product Performance
+- Products analyzed: **~XXX**
+- High-performing products contribution: **~XX% of total revenue**
+- Mid-performing products contribution: **~XX% of sales volume**
+- Low-performing products: **consistent but lower revenue impact**
+
+---
+
+### 🔹 Product Lifecycle Metrics
+- Product lifespan range: **~X – ~XX months**
+- Long-lifecycle products: **higher AMR**
+- Early-stage products: **faster initial revenue growth**
+
+---
+
+### 🔹 Recency Metrics
+- Products sold in last 12 months: **~XX%**
+- Recently sold products: **higher AOR**
+- Dormant products: **declining monthly revenue trend**
+
+---
+
+### 🔹 Customer Metrics (Customer-Level View)
+- Unique customers: **~X,XXX**
+- Revenue from repeat customers: **~XX%**
+- High-frequency customers: **significantly higher value per customer**
+
+---
+
+## 🧱 Reporting Layer (Final Output)
+
+Two reusable analytical views were created:
+
+### 🧾 Product-Level View
+- Revenue, quantity, and order metrics
+- Product segmentation (High / Mid / Low)
+- Product lifespan and recency KPIs
+
+### 👥 Customer-Level View
+- Customer order frequency and value
 - Recency indicators
-- Supports customer analytics and retention insights
+- Supports retention and behavioral analysis
 
-These views act as a **semantic layer** and can be directly connected to BI tools such as **Power BI or Tableau**.
+These views act as a **semantic layer** and can be directly connected to **Power BI / Tableau**.
 
 ---
 
-## Key SQL Concepts Used
-- Common Table Expressions (CTEs)
+## 🛠 SQL & Analytics Techniques Used
+- CTE-based transformations
 - Multi-level aggregations
 - Date intelligence using `DATEDIFF`
-- Safe calculations using `NULLIF`
-- Business KPI derivation
-- Reusable view design
-- Schema-based organization
+- Safe KPI calculations using `NULLIF`
+- Reusable analytical view design
 
 ---
 
-## Why This Project Matters
-- Demonstrates end-to-end analytical thinking using SQL only
-- Shows ability to move from raw data to business-ready reporting
-- Reflects real-world analytics workflows used in companies
-- Emphasizes clarity, scalability, and dashboard readiness
+## 🎯 Why This Project
+- Demonstrates SQL-only end-to-end analytics
+- Focuses on metrics businesses actually track
+- Built with dashboard and reporting consumption in mind
+- Mirrors real-world analytics workflows
 
 ---
 
-## Intended Audience
-- Data Analysts
-- Business Analysts
-- BI Developers
-- Hiring Managers evaluating SQL and analytical skills
+## 🚀 Career Context
+Built as part of preparation for a **first Data Analyst role after a career gap**.  
+The project emphasizes analytical thinking, SQL proficiency, and business-focused reporting.
 
 ---
 
-## Career Context
-This project was built as part of preparing for a **first Data Analyst role after a career gap**.  
-It reflects strong SQL fundamentals, business understanding, and the ability to build structured analytical outputs suitable for real organizations.
-
----
-
-## Tools & Technologies
-- SQL Server (T-SQL)
+## 💻 Tools & Technologies
+- MS SQL Server (T-SQL)
 - Relational Data Modeling
 - Analytical SQL Design
 
 ---
 
-## Notes
-- Dataset is a **company-like mock dataset** created for learning and portfolio purposes
-- No real customer or company data is used
+## 📝 Notes
+- Dataset is a **company-like mock dataset**
+- No real business or customer data is used
