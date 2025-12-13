@@ -46,8 +46,8 @@ The project converts raw transactional data into **dashboard-ready analytical vi
 Actual values will be updated based on final outputs.*
 
 ### 🔹 Overall Sales Performance
-- Sales records analyzed: **~XX,XXX**
-- Total revenue generated: **~₹X.XM**
+- Sales records analyzed: **~60,000**
+- Total revenue generated: **~₹29.36 Millions**
 - Average Order Revenue (AOR): **~₹X,XXX**
 - Average Monthly Revenue (AMR): **~₹XX,XXX**
 
