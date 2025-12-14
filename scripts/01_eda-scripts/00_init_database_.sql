@@ -43,7 +43,7 @@ BEGIN
 	-- This disconnects all other users and ensures only your session has access.
 	-- The 'ROLLBACK IMMEDIATE' option cancels all open transactions and 
 	-- disconnects users immediately.
-	ALTER DATABASE BikeSalesSupplyChainDB SET SINGLE_USER ROLLBACK IMMEDIATE;
+	ALTER DATABASE BikeSalesSupplyChainDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 
 	-- After safely disconnecting users and rolling back transactions, 
 	-- drop (delete) the database completely. 
