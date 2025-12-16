@@ -15,7 +15,7 @@ SELECT
 	MAX(birthdate) youngest_man,                                  -- Find the latest birthdate (youngest customer)
 	DATEDIFF(YEAR , MIN(birthdate) , GETDATE()) oldest_age ,      -- Calculate the current age of the oldest customer
 	DATEDIFF(YEAR , MAX(birthdate) , GETDATE()) youngest_age ,    -- Calculate the current age of the youngest customer
-	DATEDIFF(YEAR , MAX(birthdate) , GETDATE()) age_distribution  -- Show the age difference between oldest and youngest
+	DATEDIFF(YEAR , MIN(birthdate) , MAX(birthdate)) age_distribution  -- Show the age difference between oldest and youngest
 FROM gold.dim_customers
 
 
