@@ -74,20 +74,27 @@ GO
         - Replace 'fact_sales' with any table name you want to inspect.
         - You can remove the WHERE clause to list all tables and their columns.
 ********************************************************************************************/
-
+    
 SELECT
-    t.TABLE_CATALOG       AS [Database_Name],       -- Database the table belongs to
-    t.TABLE_SCHEMA        AS [Schema_Name],         -- Schema name (e.g., gold, dbo)
-    t.TABLE_NAME          AS [Table_Name],          -- Table name
-    c.COLUMN_NAME         AS [Column_Name],         -- Column name within the table
-    c.DATA_TYPE           AS [Data_Type],           -- Data type of the column
-    c.IS_NULLABLE         AS [Is_Nullable]          -- Whether NULL values are allowed
-FROM INFORMATION_SCHEMA.TABLES  AS t
-JOIN INFORMATION_SCHEMA.COLUMNS AS c
-    ON t.TABLE_SCHEMA = c.TABLE_SCHEMA
-   AND t.TABLE_NAME   = c.TABLE_NAME
-WHERE t.TABLE_NAME = 'fact_sales'       -- Filter for a specific table
--- AND t.TABLE_SCHEMA = 'gold'          -- Optional: filter by schema
-ORDER BY t.TABLE_SCHEMA, t.TABLE_NAME, c.ORDINAL_POSITION;
+    T.TABLE_CATALOG            database_name        , 
+    T.TABLE_SCHEMA             schema_name          ,
+    T.TABLE_NAME               table_name           ,
+    T.TABLE_TYPE               object_type          ,
+    C.COLUMN_NAME              column_name          ,
+    C.IS_NULLABLE              is_null              ,
+    C.DATA_TYPE                data_type            ,
+    C.CHARACTER_MAXIMUM_LENGTH character_max_length 
+FROM INFORMATION_SCHEMA.TABLES  T
+INNER JOIN 
+     INFORMATION_SCHEMA.COLUMNS C
+ON 
+    T.TABLE_CATALOG = C.TABLE_CATALOG AND
+    T.TABLE_SCHEMA  = C.TABLE_SCHEMA  AND
+    T.TABLE_NAME    = C.TABLE_NAME
+WHERE 
+    T.TABLE_NAME   = 'fact_sales' --AND -- to check individual table informations.
+    --T.TABLE_SCHEMA = 'gold' -- optional for schema level filtering 
+ORDER BY
+    database_name , schema_name , table_name ;
 GO
 
