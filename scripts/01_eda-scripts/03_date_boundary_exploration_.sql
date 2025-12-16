@@ -30,3 +30,32 @@ SELECT
 	DATEDIFF(MONTH , MIN(order_date) , MAX(order_date)) order_lifespan_month , -- Difference in months
 	DATEDIFF(DAY , MIN(order_date) , MAX(order_date)) order_lifespan_day       -- Difference in days (total span)
 FROM gold.fact_sales
+
+
+
+
+-- ============================
+-- AVERAGE LIFESPAN OF CATEGORY
+-- ============================
+
+WITH initial AS
+(
+	SELECT
+		p.product_key ,
+		p.category,
+		MIN(f.order_date) first_order_date,
+		MAX(f.order_date) last_order_date,
+		DATEDIFF(MONTH , MIN(f.order_date) , MAX(f.order_date)) product_lifespan_months
+	FROM gold.fact_sales f
+	left join gold.dim_products p
+	on f.product_key = p.product_key
+	WHERE order_date IS NOT NULL 
+	GROUP BY p.product_key , p.category 
+)
+
+SELECT 
+	category ,
+	AVG(product_lifespan_months) avg_lifespan_months
+FROM initial 
+GROUP BY category;
+GO
