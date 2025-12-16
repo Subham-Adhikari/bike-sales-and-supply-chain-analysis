@@ -76,10 +76,9 @@ Actual values will be updated based on final outputs.*
 ---
 
 ### 🔹 Customer Metrics (Customer-Level View)
-- Unique customers: **~X,XXX**
-- Revenue from repeat customers: **~XX%**
-- High-frequency customers: **significantly higher value per customer**
-
+- Unique customers: **~18,484**
+- Revenue from repeat customers: **avgerage ~1000**
+  
 ---
 
 ## 🧱 Reporting Layer (Final Output)
