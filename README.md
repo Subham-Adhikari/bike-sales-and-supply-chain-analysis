@@ -48,7 +48,7 @@ Actual values will be updated based on final outputs.*
 ### 🔹 Overall Sales Performance
 - Sales records analyzed: **~60,000**
 - Total revenue generated: **~₹29.36 Million**
-- Average Order Revenue (AOR): **~₹X,XXX**
+- Average Order Revenue (AOR): **~₹1,061**
 - Average Monthly Revenue (AMR): **~₹XX,XXX**
 
 ---
