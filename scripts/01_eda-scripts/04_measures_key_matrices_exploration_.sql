@@ -168,7 +168,8 @@ WHERE P.product_key IS NULL;
 -------------------------------------------------
 -- 12. PRODUCTS NOT YET SOLD
 -- Finds items that exist in PRODUCT table 
--- but do not appear in FACT table.
+-- but do not appear in FACT table. FIND THE 
+-- COST PRICE OF THOSE .
 -------------------------------------------------
 SELECT
 	SUM(P.cost) AS unsold_product_cost
