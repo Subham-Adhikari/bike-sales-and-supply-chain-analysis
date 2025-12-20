@@ -20,8 +20,10 @@ GO
 -- 2. TOTAL COST OF GOODS SOLD (COGS)
 -------------------------------------------------
 SELECT
-	SUM(cost) AS total_cogs
-FROM gold.dim_products;
+	SUM(F.quantity * P.cost) cogs
+FROM gold.fact_sales F
+LEFT JOIN gold.dim_products P
+ON F.product_key = P.product_key;
 GO
 
 
