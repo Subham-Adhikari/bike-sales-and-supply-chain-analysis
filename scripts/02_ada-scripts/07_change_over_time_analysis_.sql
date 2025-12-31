@@ -82,3 +82,42 @@ CREATE NONCLUSTERED INDEX indx_factSales_orderDate
 ON gold.fact_sales(order_date)
 INCLUDE (quantity, sales_amount);
 -------------------------------------------------------------------------------------------------------- */
+
+
+
+
+
+
+-- extra, MOM
+
+--> how sales change over the year or over the month
+
+WITH cte_initial AS
+(
+SELECT
+	order_date,
+	FORMAT(order_date, 'yyyy-MMM') mom_basis,
+	SUM(sales_amount) current_month_sale,
+	LAG(SUM(sales_amount)) OVER(ORDER BY order_date) previous_month_sale,
+	-- SUM(sales_amount) - LAG(SUM(sales_amount)) OVER(ORDER BY order_date) changes_from_previous_month,
+	CASE
+		WHEN
+			SUM(sales_amount) - LAG(SUM(sales_amount)) OVER(ORDER BY order_date) IS NULL OR
+			SUM(sales_amount) - LAG(SUM(sales_amount)) OVER(ORDER BY order_date) = 0 
+				THEN 'nutral'
+		WHEN 
+			SUM(sales_amount) - LAG(SUM(sales_amount)) OVER(ORDER BY order_date) < 0 
+				THEN 'loss'
+		ELSE 'profit'
+	END changes_from_previous_month_segment
+FROM gold.fact_sales
+WHERE order_date IS NOT NULL AND YEAR(order_date) IN ('2011', '2012', '2013')
+GROUP BY order_date, FORMAT(order_date, 'yyyy-MMM')
+)
+
+SELECT
+	changes_from_previous_month_segment,
+	COUNT(changes_from_previous_month_segment) howManyTimesProfitOrLoss
+FROM cte_initial
+GROUP BY changes_from_previous_month_segment;
+GO
