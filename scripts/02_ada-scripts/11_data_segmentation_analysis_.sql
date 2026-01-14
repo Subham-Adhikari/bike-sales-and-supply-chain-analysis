@@ -102,3 +102,100 @@ FROM customer_segmented
 GROUP BY customer_segmentation
 ORDER BY total_customers DESC ; 
 GO
+
+
+
+
+--==============
+--	FROM CHATGPT
+--==============
+	
+/*
+	“Which types of customers are actually driving our revenue?”
+	Can we group customers into high-value, medium-value, and low-value segments
+	based on how much they spend and how often they purchase (purchase frequency)?
+*/
+
+
+-- Step 1: Calculate customer-level metrics
+WITH customer_metrics AS
+(
+    SELECT
+        C.customer_id,
+        SUM(F.sales_amount) AS total_revenue,
+        COUNT(DISTINCT F.order_number) AS purchase_frequency
+    FROM gold.fact_sales F
+    INNER JOIN gold.dim_customers C
+        ON F.customer_key = C.customer_key
+    GROUP BY C.customer_id
+),
+
+-- Step 2: Rank customers based on revenue
+customer_rank AS
+(
+    SELECT
+        customer_id,
+        total_revenue,
+        purchase_frequency,
+        ROUND(
+            CUME_DIST() OVER(ORDER BY total_revenue DESC) * 100, 0
+        ) AS customer_segment_bucket
+    FROM customer_metrics
+),
+
+-- Step 3: Assign value segments
+customer_segment AS
+(
+    SELECT
+        customer_id,
+        total_revenue,
+        purchase_frequency,
+        CASE
+            WHEN customer_segment_bucket <= 33 THEN 'high-value'
+            WHEN customer_segment_bucket <= 66 THEN 'medium-value'
+            ELSE 'low-value'
+        END AS customer_segmentation
+    FROM customer_rank
+)
+
+-- Step 4: Aggregate results at segment level
+SELECT
+    customer_segmentation,
+    COUNT(customer_id) AS customer_count, -- grouping done before
+    SUM(total_revenue) AS total_revenue,
+    SUM(purchase_frequency) AS total_orders,
+    ROUND(
+        CAST(SUM(total_revenue) AS float) / SUM(SUM(total_revenue)) OVER()*100
+        , 2) AS revenue_pct
+FROM customer_segment
+GROUP BY customer_segmentation
+ORDER BY 
+    CASE customer_segmentation
+        WHEN 'high-value' THEN 1
+        WHEN 'medium-value' THEN 2
+        ELSE 3
+    END;
+GO
+
+
+
+/*
+    ---------
+    Insights:
+    ---------
+    Our revenue is heavily driven by high-value customers, who make up about a third of
+    our customer base but generate nearly 88% of sales. Medium-value customers contribute
+    a small portion of revenue despite a similar number of orders, while low-value customers
+    contribute very little. This indicates that focusing on retaining high-value customers
+    and upselling medium-value customers could significantly impact overall revenue.
+
+
+    ---------------
+    Recommendation:
+    ---------------
+    Revenue is highly concentrated among high-value customers, so retention and targeted
+    upselling should be our top priorities, while minimizing spend on low-value segments.
+
+
+
+*/
