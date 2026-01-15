@@ -199,3 +199,119 @@ GO
 
 
 */
+
+--=============================================================================================================================================================
+--=============================================================================================================================================================
+	
+
+
+/*
+2. “Are different customer groups buying differently?”
+
+Do customers with different demographics (age group, gender, marital status, country) 
+show meaningful differences in purchasing behavior or revenue contribution?
+
+***
+	i did only on the basis of age group, if i want other demographic then simply change the 
+	age group to desired demographics.
+
+*/
+WITH base_data AS
+(
+    SELECT
+        F.customer_key,
+        CASE
+            WHEN C.birthdate IS NULL THEN 'n/a'
+            WHEN (
+                DATEDIFF(YEAR, C.birthdate, GETDATE())
+                - CASE 
+                    WHEN DATEADD(
+                        YEAR,
+                        DATEDIFF(YEAR, C.birthdate, GETDATE()),
+                        C.birthdate
+                    ) > GETDATE()
+                    THEN 1 ELSE 0
+                  END
+            ) > 55 THEN '55+'
+            WHEN (
+                DATEDIFF(YEAR, C.birthdate, GETDATE())
+                - CASE 
+                    WHEN DATEADD(
+                        YEAR,
+                        DATEDIFF(YEAR, C.birthdate, GETDATE()),
+                        C.birthdate
+                    ) > GETDATE()
+                    THEN 1 ELSE 0
+                  END
+            ) BETWEEN 46 AND 55 THEN '46-55'
+            WHEN (
+                DATEDIFF(YEAR, C.birthdate, GETDATE())
+                - CASE 
+                    WHEN DATEADD(
+                        YEAR,
+                        DATEDIFF(YEAR, C.birthdate, GETDATE()),
+                        C.birthdate
+                    ) > GETDATE()
+                    THEN 1 ELSE 0
+                  END
+            ) BETWEEN 36 AND 45 THEN '36-45'
+            WHEN (
+                DATEDIFF(YEAR, C.birthdate, GETDATE())
+                - CASE 
+                    WHEN DATEADD(
+                        YEAR,
+                        DATEDIFF(YEAR, C.birthdate, GETDATE()),
+                        C.birthdate
+                    ) > GETDATE()
+                    THEN 1 ELSE 0
+                  END
+            ) BETWEEN 26 AND 35 THEN '26-35'
+            ELSE '18-25'
+        END AS age_group,
+        F.order_number,
+        F.sales_amount
+    FROM gold.fact_sales F
+    INNER JOIN gold.dim_customers C
+        ON F.customer_key = C.customer_key
+)
+
+SELECT
+    age_group,
+    COUNT(DISTINCT customer_key) AS total_customers,
+    COUNT(DISTINCT order_number) AS total_orders,
+    SUM(sales_amount) AS total_revenue,
+	ROUND(
+		CAST(SUM(sales_amount) AS float) / COUNT(DISTINCT customer_key)
+		, 0) avg_revenue_per_customer,
+	ROUND(
+		CAST(SUM(sales_amount) AS float) / COUNT(DISTINCT order_number)
+		, 0) avg_order_value --it is average amount of money each customer spends per order
+FROM base_data
+GROUP BY age_group
+ORDER BY total_revenue DESC;
+GO
+
+/*
+    ---------
+    Insights:
+    ---------
+    Customers aged 55+ bring the highest total revenue (~$12.7M), showing strong loyalty.
+    Customers aged 46–55 spend the most per person (~$1,785), making them the most valuable group.
+    Customers aged 36–45 spend less on average, but they represent a clear growth opportunity.
+    A small group with missing age data shows unusually high spending, which points to data quality issues.
+
+    ---------------
+    Recommendation:
+    ---------------
+    Focus on retaining and rewarding customers aged 46–55 with loyalty programs and premium offers.
+    Keep 55+ customers engaged by making shopping easy, trustworthy, and reliable.
+    Upsell customers aged 36–45 with bundles and upgrades to increase their value.
+    Fix missing age data to improve personalization and ensure accurate insights.
+*/
+
+
+
+
+
+
+
